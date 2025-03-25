@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import logo from '../img/LOGO.png';
+import { LoginForm } from './auth/LoginForm';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -105,6 +106,11 @@ export function Navbar() {
             <Link to="/Donate" onClick={() => setIsMenuOpen(false)}>
               <button className="w-full text-left bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700">
                 Faire un don
+              </button>
+            </Link>
+            <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+              <button className="w-full text-left bg-green-600 text-white px-3 py-2 hover:bg-green-700">
+                Log in
               </button>
             </Link>
           </div>
