@@ -1,14 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, X, ChevronRight } from 'lucide-react';
+import { MessageCircle, X, ChevronRight, User } from 'lucide-react';
 import { useChatStore } from '../stores/chatStore';
+import { useAuthStore } from '../stores/authStore';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 export function Chat() {
-  const [isChatOpen, setIsChatOpen] = React.useState(false);
-  const [message, setMessage] = React.useState('');
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [guestName, setGuestName] = useState('');
   const { messages, sendMessage, fetchMessages, isLoading } = useChatStore();
+  const { user } = useAuthStore();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,7 +28,11 @@ export function Chat() {
     e.preventDefault();
     if (!message.trim()) return;
 
-    await sendMessage(message);
+    if (!user && !guestName.trim()) {
+      setGuestName('Invité');
+    }
+
+    await sendMessage(message, !user ? guestName || 'Invité' : undefined);
     setMessage('');
   };
 
@@ -65,14 +72,14 @@ export function Chat() {
                 <div
                   key={msg._id}
                   className={`mb-4 ${
-                    msg.userId === 'admin'
+                    msg.userId === (user?._id || 'guest')
                       ? 'ml-auto text-right'
                       : 'mr-auto'
                   }`}
                 >
                   <div
                     className={`inline-block p-3 rounded-lg ${
-                      msg.userId === 'admin'
+                      msg.userId === (user?._id || 'guest')
                         ? 'bg-green-600 text-white'
                         : 'bg-gray-100'
                     }`}
@@ -88,6 +95,15 @@ export function Chat() {
             <div ref={messagesEndRef} />
           </div>
           <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
+            {!user && (
+              <input
+                type="text"
+                value={guestName}
+                onChange={(e) => setGuestName(e.target.value)}
+                placeholder="Votre nom (optionnel)"
+                className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            )}
             <div className="flex space-x-2">
               <input
                 type="text"

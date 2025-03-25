@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { API_BASE_URL, API_ENDPOINTS } from '../components/config/api';
 
 interface User {
   _id: string;
@@ -22,8 +23,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
   login: async (email: string, password: string) => {
     try {
-      set({ isLoading: true });
-      const response = await fetch('http://serverisigsite.onrender.com/api/users/login', {
+      set({ isLoading: true, error: null });
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.auth.login}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,25 +32,26 @@ export const useAuthStore = create<AuthStore>((set) => ({
         body: JSON.stringify({ email, password }),
       });
 
-      if (!response.ok) throw new Error('Invalid credentials');
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
 
-      const { token } = await response.json();
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', data.token);
       
       // Decode token to get user info
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      set({ user: payload });
+      const payload = JSON.parse(atob(data.token.split('.')[1]));
+      set({ user: payload, isLoading: false });
     } catch (error) {
-      set({ error: (error as Error).message });
-    } finally {
-      set({ isLoading: false });
+      set({ error: (error as Error).message, isLoading: false });
     }
   },
 
   register: async (email: string, password: string) => {
     try {
-      set({ isLoading: true });
-      const response = await fetch('http://serverisigsite.onrender.com/api/users/register', {
+      set({ isLoading: true, error: null });
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.auth.register}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,19 +59,19 @@ export const useAuthStore = create<AuthStore>((set) => ({
         body: JSON.stringify({ email, password }),
       });
 
-      if (!response.ok) throw new Error('Registration failed');
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
 
-      const { token } = await response.json();
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', data.token);
       
       // Decode token to get user info
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      set({ user: payload });
+      const payload = JSON.parse(atob(data.token.split('.')[1]));
+      set({ user: payload, isLoading: false });
     } catch (error) {
-      set({ error: (error as Error).message });
-      console.log('erreur est', error)
-    } finally {
-      set({ isLoading: false });
+      set({ error: (error as Error).message, isLoading: false });
     }
   },
 

@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn, UserPlus, LogOut } from 'lucide-react';
+import { useAuthStore } from '../stores/authStore';
 import logo from '../img/LOGO.png';
-import { LoginForm } from './auth/LoginForm';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuthStore();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -18,6 +20,11 @@ export function Navbar() {
     { path: '/news', label: 'Actualités' },
     { path: '/contact', label: 'Contact' },
   ];
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 p-3 w-full">
@@ -30,7 +37,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -38,13 +45,59 @@ export function Navbar() {
                 className={`${
                   isActive(item.path)
                     ? 'text-green-600 border-b-4 border-green-600'
-                    : 'text-gray-600 hover:text-green-600 b'
+                    : 'text-gray-600 hover:text-green-600'
                 } transition-colors duration-200`}
               >
                 {item.label}
               </Link>
             ))}
-            <Link to="/Donate">
+
+            {user ? (
+              <div className="flex items-center space-x-4">
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="text-gray-600 hover:text-green-600 transition-colors duration-200"
+                  >
+                    Admin Panel
+                  </Link>
+                )}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleLogout}
+                  className="flex items-center px-4 py-2 border border-red-500 text-red-500 rounded-md hover:bg-red-50"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Déconnexion
+                </motion.button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link to="/login">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-50"
+                  >
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Connexion
+                  </motion.button>
+                </Link>
+                <Link to="/register">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                  >
+                    <UserPlus className="h-4 w-4 mr-2" />
+                    Inscription
+                  </motion.button>
+                </Link>
+              </div>
+            )}
+
+            <Link to="/donate">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -103,14 +156,53 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <Link to="/Donate" onClick={() => setIsMenuOpen(false)}>
+
+            {user ? (
+              <>
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="block px-3 py-2 text-gray-600 hover:text-green-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Admin Panel
+                  </Link>
+                )}
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-50"
+                >
+                  <LogOut className="h-4 w-4 inline mr-2" />
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="block px-3 py-2 text-gray-600 hover:text-green-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <LogIn className="h-4 w-4 inline mr-2" />
+                  Connexion
+                </Link>
+                <Link
+                  to="/register"
+                  className="block px-3 py-2 text-gray-600 hover:text-green-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <UserPlus className="h-4 w-4 inline mr-2" />
+                  Inscription
+                </Link>
+              </>
+            )}
+
+            <Link to="/donate" onClick={() => setIsMenuOpen(false)}>
               <button className="w-full text-left bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700">
                 Faire un don
-              </button>
-            </Link>
-            <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-              <button className="w-full text-left bg-green-600 text-white px-3 py-2 hover:bg-green-700">
-                Log in
               </button>
             </Link>
           </div>

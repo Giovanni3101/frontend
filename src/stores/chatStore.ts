@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import io from 'socket.io-client';
+import { API_BASE_URL, API_ENDPOINTS, SOCKET_URL } from '../components/config/api';
 
-const socket = io('http://serverisigsite.onrender.com');
+const socket = io(SOCKET_URL);
 
 interface Message {
   _id: string;
   content: string;
-  userId: string;
+  userId: string | null;
   createdAt: string;
 }
 
@@ -14,33 +15,46 @@ interface ChatStore {
   messages: Message[];
   isLoading: boolean;
   error: string | null;
-  sendMessage: (content: string) => Promise<void>;
+  sendMessage: (content: string, guestName?: string) => Promise<void>;
   fetchMessages: () => Promise<void>;
 }
 
-export const useChatStore = create<ChatStore>((set) => ({
+export const useChatStore = create<ChatStore>((set, get) => ({
   messages: [],
   isLoading: false,
   error: null,
 
-  sendMessage: async (content: string) => {
+  sendMessage: async (content: string, guestName?: string) => {
     try {
       const token = localStorage.getItem('token');
-      if (!token) throw new Error('Not authenticated');
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
 
-      const response = await fetch('http://serverisigsite.onrender.com/api/messages', {
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const body = guestName 
+        ? { content, guestName }
+        : { content };
+
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.messages}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ content }),
+        headers,
+        body: JSON.stringify(body),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
 
       const newMessage = await response.json();
       socket.emit('send_message', newMessage);
+      
+      set((state) => ({
+        messages: [...state.messages, newMessage],
+      }));
     } catch (error) {
       set({ error: (error as Error).message });
     }
@@ -49,29 +63,22 @@ export const useChatStore = create<ChatStore>((set) => ({
   fetchMessages: async () => {
     try {
       set({ isLoading: true });
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('Not authenticated');
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.messages}`);
 
-      const response = await fetch('http://serverisigsite.onrender.com/api/messages', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) throw new Error('Failed to fetch messages');
+      if (!response.ok) {
+        throw new Error('Failed to fetch messages');
+      }
 
       const messages = await response.json();
-      set({ messages });
+      set({ messages, isLoading: false });
     } catch (error) {
-      set({ error: (error as Error).message });
-    } finally {
-      set({ isLoading: false });
+      set({ error: (error as Error).message, isLoading: false });
     }
   },
 }));
 
 // Socket.IO event listeners
-socket.on('receive_message', (message) => {
+socket.on('receive_message', (message: Message) => {
   useChatStore.setState((state) => ({
     messages: [...state.messages, message],
   }));

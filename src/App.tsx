@@ -15,6 +15,7 @@ import { Formation } from './pages/Projects/Formation';
 import { Admin } from './pages/Admin';
 import { LoginForm } from './components/auth/LoginForm';
 import { RegisterForm } from './components/auth/RegisterForm';
+import { PrivateRoute } from './components/auth/PrivateRoute';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/news" element={<Blog />} />
               <Route path="/donate" element={<Donate />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/register" element={<RegisterForm />} />
               <Route path="/projects/agriculture" element={<Agriculture />} />
               <Route
                 path="/projects/energie-renouvelable"
@@ -38,9 +41,14 @@ function App() {
                 path="/projects/formation-professionnelle"
                 element={<Formation />}
               />
-              <Route path="/admin" element={<Admin />} />
-              <Route path='/login' element={<LoginForm />} />
-              <Route path='/register' element={<RegisterForm />} />
+              <Route
+                path="/admin"
+                element={
+                  <PrivateRoute>
+                    <Admin />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/contact"
                 element={
