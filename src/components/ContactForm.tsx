@@ -25,7 +25,7 @@ export function ContactForm() {
         },
         body: JSON.stringify({
           ...formData,
-          to: 'giovannimahasano@gmail.com',
+          to: '311062gf@gmail.com',
         }),
       });
 
