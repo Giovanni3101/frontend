@@ -1,0 +1,109 @@
+.style2 {
+  /* position: relative; */
+  background-image: url(./img/wp2916561.webp);
+  background-size: cover;
+  /* border-bottom-left-radius: 200px; */
+  /* height: calc(100% - 80px); */
+}
+
+.styleTexte {
+  z-index: 1;
+}
+
+.form {
+  background-image: url(../src/img/R.jpeg);
+  background-size: cover;
+}
+
+.styleTexte::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-radius: 100px;
+  backdrop-filter: blur(20px);
+  z-index: -1;
+}
+
+.partner {
+  background-image: url(./img/R.jpeg);
+  background-size: cover;
+  height: 350px;
+  margin-bottom: 150px;
+}
+
+.partnerStyle {
+  z-index: 1;
+}
+
+.partnerStyle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-radius: 1px;
+  backdrop-filter: blur(20px);
+  z-index: -1;
+}
+
+.aboutimgstyle {
+  padding: 4px;
+  border: 3px dashed green;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .partner {
+    height: auto;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .partner {
+    height: auto;
+  }
+}
+@media (max-width: 575px) {
+  .partner {
+    height: auto;
+    margin-bottom: 0px;
+  }
+}
+
+.bppp:last-child {
+  color: white;
+  border: 2px solid rgb(12, 157, 12);
+  background-color: rgb(12, 157, 12);
+  border-radius: 10px;
+}
+
+.classe {
+  background-color: whitesmoke;
+}
+
+.bgcontact {
+  background-image: url(../src/img/wp2916561.webp);
+  background-size: cover;
+}
+
+.contactStyle {
+  z-index: 1;
+}
+
+.contactStyle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-radius: 1px;
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
+.navbarstyle {
+  background-color: whitesmoke;
+}
