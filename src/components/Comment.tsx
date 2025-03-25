@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 
 export function Comments() {
-  const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [messageData, setMessageData] = useState({
     email: '',

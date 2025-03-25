@@ -18,7 +18,7 @@ export function ContactForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://serverisigsite.onrender.com/api/contact', {
+      const response = await fetch('${API_BASE_URL}${API_ENDPOINTS.contact}', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

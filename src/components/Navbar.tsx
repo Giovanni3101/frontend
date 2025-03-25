@@ -157,7 +157,7 @@ export function Navbar() {
               </Link>
             ))}
 
-            {user ? (
+            {!user ? (
               <>
                 {user.role === 'admin' && (
                   <Link
