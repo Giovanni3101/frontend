@@ -118,8 +118,7 @@ export function Footer() {
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>
-          </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid flex gap-2 mt-4">
                 <input
                   type="email"
@@ -149,6 +148,7 @@ export function Footer() {
                 </motion.p>
               )}
             </form>
+          </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-800">
