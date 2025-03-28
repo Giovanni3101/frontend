@@ -1,8 +1,9 @@
 // Configuration des points de terminaison de l'API
 // export const API_BASE_URL = 'https://serverisigsite.onrender.com';
 // export const SOCKET_URL = 'https://serverisigsite.onrender.com';
-export const API_BASE_URL = 'http://l';
-export const SOCKET_URL = 'http://serverisigsite.onrender.com';
+// Configuration des points de terminaison de l'API
+export const API_BASE_URL = 'https://serverisigsite.onrender.com';
+export const SOCKET_URL = 'https://serverisigsite.onrender.com';
 
 // Points de terminaison de l'API
 export const API_ENDPOINTS = {

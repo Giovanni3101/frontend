@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
+import { useAuthStore } from './stores/authStore';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -18,6 +20,12 @@ import { RegisterForm } from './components/auth/RegisterForm';
 import { PrivateRoute } from './components/auth/PrivateRoute';
 
 function App() {
+  const { checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <HelmetProvider>
       <Router>
@@ -44,7 +52,7 @@ function App() {
               <Route
                 path="/admin"
                 element={
-                  <PrivateRoute>
+                  <PrivateRoute adminOnly>
                     <Admin />
                   </PrivateRoute>
                 }

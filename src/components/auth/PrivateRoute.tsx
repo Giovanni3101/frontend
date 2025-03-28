@@ -3,13 +3,18 @@ import { useAuthStore } from '../../stores/authStore';
 
 interface PrivateRouteProps {
   children: React.ReactNode;
+  adminOnly?: boolean;
 }
 
-export function PrivateRoute({ children }: PrivateRouteProps) {
+export function PrivateRoute({ children, adminOnly = true }: PrivateRouteProps) {
   const { user } = useAuthStore();
 
-  if (!user || user.role !== 'admin') {
+  if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (adminOnly && user.role !== 'admin') {
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
