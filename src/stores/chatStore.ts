@@ -8,6 +8,7 @@ interface Message {
   _id: string;
   content: string;
   userId: string | null;
+  userName: string;
   createdAt: string;
 }
 
@@ -15,16 +16,16 @@ interface ChatStore {
   messages: Message[];
   isLoading: boolean;
   error: string | null;
-  sendMessage: (content: string, guestName?: string) => Promise<void>;
+  sendMessage: (content: string, userName: string) => Promise<void>;
   fetchMessages: () => Promise<void>;
 }
 
-export const useChatStore = create<ChatStore>((set, get) => ({
+export const useChatStore = create<ChatStore>((set) => ({
   messages: [],
   isLoading: false,
   error: null,
 
-  sendMessage: async (content: string, guestName?: string) => {
+  sendMessage: async (content: string, userName: string) => {
     try {
       const token = localStorage.getItem('token');
       const headers: Record<string, string> = {
@@ -35,14 +36,10 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const body = guestName 
-        ? { content, guestName }
-        : { content };
-
       const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.messages}`, {
         method: 'POST',
         headers,
-        body: JSON.stringify(body),
+        body: JSON.stringify({ content, userName }),
       });
 
       if (!response.ok) {
@@ -57,6 +54,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       }));
     } catch (error) {
       set({ error: (error as Error).message });
+      throw error;
     }
   },
 
@@ -77,7 +75,6 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   },
 }));
 
-// Socket.IO event listeners
 socket.on('receive_message', (message: Message) => {
   useChatStore.setState((state) => ({
     messages: [...state.messages, message],

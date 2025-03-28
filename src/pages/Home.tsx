@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from "react";
 import { useInView } from 'react-intersection-observer';
 import {
   Leaf,
@@ -22,7 +23,8 @@ import photo10 from '../img/PHOTO17.png';
 import values from '../img/GettyImages-682151958.jpg';
 import energy from '../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg';
 import entre from '../img/PHOTO8.jpg';
-import { div } from 'framer-motion/client';
+import FILLE2 from "../img/fille.jpg"
+import BRO1 from "../img/kev.jpg"
 
 // 061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg
 // 30551-mi-1200x630-black-entrepreneur.webp
@@ -79,10 +81,113 @@ export function Home() {
     },
   ];
 
+  const testimonials = [
+    // {
+    //   name: "Kethia mwenge",
+    //   location: "Kalemie, Tanganyika",
+    //   story:
+    //     "Grâce à Impact Eco Groupe, notre village a désormais accès à l’eau potable et à l’éducation pour nos enfants. Nous avons retrouvé l’espoir !",
+    //   image: FILLE2,
+    // },
+    // {
+    //   name: "isaac shema",
+    //   location: "Matadi, Kongo-centrale",
+    //   story:
+    //     "J’ai reçu un soutien pour lancer mon petit commerce. Aujourd’hui, je peux subvenir aux besoins de ma famille. Merci !",
+    //   image: BRO1,
+    // },
+    // {
+    //   name: "Nathy Mahamba",
+    //   location: "goma, nord-kivu",
+    //   story:
+    //     "Nos enfants peuvent enfin aller à l’école sans marcher des kilomètres. Un immense merci pour cette aide précieuse !",
+    //   image: FILLE2,
+    // },
+    // {
+    //   name: "Kevin Mulemberi",
+    //   location: "ariwara, haut-uelé",
+    //   story:
+    //     "Grâce à Impact Eco Groupe, notre village a désormais accès à l’eau potable et à l’éducation pour nos enfants. Nous avons retrouvé l’espoir !",
+    //   image: BRO1,
+    // },
+    {
+      name: "Giovanni MHS",
+      location: "rutsuru, nord-kivu",
+      story:
+        "J’ai reçu un soutien pour lancer mon petit commerce. Aujourd’hui, je peux subvenir aux besoins de ma famille. Merci !",
+      image: BRO1,
+    },
+    {
+      name: "Faty kambasu",
+      location: "walikale, nord-kivu",
+      story:
+        "Nos enfants peuvent enfin aller à l’école sans marcher des kilomètres. Un immense merci pour cette aide précieuse !",
+      image: FILLE2,
+    },
+    {
+      name: "Giovanni MHS",
+      location: "rutsuru, nord-kivu",
+      story:
+        "J’ai reçu un soutien pour lancer mon petit commerce. Aujourd’hui, je peux subvenir aux besoins de ma famille. Merci !",
+      image: BRO1,
+    },
+    {
+      name: "Faty kambasu",
+      location: "walikale, nord-kivu",
+      story:
+        "Nos enfants peuvent enfin aller à l’école sans marcher des kilomètres. Un immense merci pour cette aide précieuse !",
+      image: FILLE2,
+    },
+    {
+      name: "Giovanni MHS",
+      location: "rutsuru, nord-kivu",
+      story:
+        "J’ai reçu un soutien pour lancer mon petit commerce. Aujourd’hui, je peux subvenir aux besoins de ma famille. Merci !",
+      image: BRO1,
+    },
+    {
+      name: "Faty kambasu",
+      location: "walikale, nord-kivu",
+      story:
+        "Nos enfants peuvent enfin aller à l’école sans marcher des kilomètres. Un immense merci pour cette aide précieuse !",
+      image: FILLE2,
+    },
+  ];
+  const [index, setIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  useEffect(() => {
+    startAutoSlide();
+    return () => stopAutoSlide(); // Nettoyer l'intervalle au démontage
+  }, []);
+
+  const startAutoSlide = () => {
+    stopAutoSlide(); // Éviter les doublons
+    intervalRef.current = setInterval(() => {
+      setIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+  };
+
+  const stopAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
-      <section ref={heroRef} className="style2 min-h-screen pt-16 items-center">
+      {/* <section ref={heroRef} className="style2 min-h-screen pt-16 items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-40">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -127,6 +232,66 @@ export function Home() {
             </div>
           </motion.div>
         </div>
+      </section> */}
+      <section
+        ref={heroRef}
+        className="relative min-h-screen pt-16 items-center"
+        onMouseLeave={startAutoSlide}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.5 }}
+            className='style2 min-h-screen mt-[-50px]'
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-40">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8 }}
+                className="text-center"
+              >
+                <h1 className="mt-10 text-lg text-gray-900 sm:text-4xl md:text-6xl">
+                  <span className="block text-white">Innovation Durable en</span>
+                  <span className="block text-green-600 font-extrabold">
+                    République Démocratique du Congo
+                  </span>
+                </h1>
+                <p className="styleTexte relative rounded-full border-2 p-4 mt-8 mx-auto text-base sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                  Ensemble, construisons un avenir durable à travers des projets
+                  innovants en agriculture moderne, transformation écologique et
+                  développement socio-économique.
+                </p>
+                <div className="mt-6 mx-auto sm:flex sm:justify-center md:mt-8">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="rounded-md shadow"
+                  >
+                    <a
+                      href="#projects"
+                      className="bpp flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10"
+                    >
+                      Découvrir nos projets
+                    </a>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3"
+                  >
+                    <a
+                      href="/contact"
+                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+                    >
+                      Nous contacter
+                    </a>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </section>
 
       {/* About section */}
@@ -490,6 +655,93 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      <div className="w-full">
+        {isMobile ? (
+          <div className="p-8 bg-green-50">
+            <div>
+              <h2 className="text-base text-green-600 font-semibold tracking-wide uppercase border-double">
+                Temoignage
+              </h2>
+              <p className="mt-2 text-xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Decouvrez quelques temoignages
+              </p>
+            </div>
+
+            <div className="relative max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5" onMouseEnter={stopAutoSlide}
+              onMouseLeave={startAutoSlide}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className='flex space-x-6 align-center justify-center border-tl-full border-bl-full'>
+                    <div className=''>
+                      <img
+                        src={testimonials[index].image}
+                        alt={testimonials[index].name}
+                        className="rounded-full border-4 border-green-500"
+                      />
+                    </div>
+                    <div className=''>
+                      <h3 className="mt-4 text-lg font-bold text-black border-b">
+                        {testimonials[index].name}
+                      </h3>
+                      <p className="text-sm text-green-600">{testimonials[index].location}</p>
+                      <p className="mt-3 text-gray-800 italic">"{testimonials[index].story}"</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        ) : (
+
+          <div className='bg-green-50 pt-8'>
+            <h2 className="text-center text-base text-green-600 font-semibold tracking-wide uppercase border-double">
+              Temoignage
+            </h2>
+            <p className="text-center mt-2 text-xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Decouvrez quelques temoignages
+            </p>
+
+            <div className="relative max-w-3xl mt-10 mx-auto p-6 bg-white shadow-lg rounded-tl-full rounded-bl-full" onMouseEnter={stopAutoSlide}
+              onMouseLeave={startAutoSlide}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className='flex space-x-6 align-center justify-center border-tl-full border-bl-full'>
+                    <div>
+                      <img
+                        src={testimonials[index].image}
+                        alt={testimonials[index].name}
+                        className="w-[300px] h-[200px] mx-auto rounded-full border-4 border-green-500"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="mt-4 text-lg font-bold text-black border-b">
+                        {testimonials[index].name}
+                      </h3>
+                      <p className="text-sm text-green-600">{testimonials[index].location}</p>
+                      <p className="mt-3 text-gray-800 italic">"{testimonials[index].story}"</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+        )}
+      </div>
+
 
       {/* Newsletter Section */}
       <section className="py-12 bg-gray-50">

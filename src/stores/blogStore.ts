@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { API_BASE_URL, API_ENDPOINTS } from '../components/config/api';
 
 interface BlogPost {
   _id: string;
@@ -29,7 +30,7 @@ export const useBlogStore = create<BlogStore>((set) => ({
   fetchPosts: async () => {
     try {
       set({ isLoading: true });
-      const response = await fetch('http://serverisigsite.onrender.com/api/blog');
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.blog}`);
       if (!response.ok) throw new Error('Failed to fetch posts');
 
       const posts = await response.json();
@@ -46,7 +47,7 @@ export const useBlogStore = create<BlogStore>((set) => ({
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Not authenticated');
 
-      const response = await fetch('http://serverisigsite.onrender.com/api/blog', {
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.blog}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

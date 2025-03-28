@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, HomeIcon, Globe, PhoneCall, Mail } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { API_BASE_URL, API_ENDPOINTS } from '../components/config/api';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -18,14 +19,14 @@ export function ContactForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('${API_BASE_URL}${API_ENDPOINTS.contact}', {
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.contact}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           ...formData,
-          to: '311062gf@gmail.com',
+          to: 'giovannimahasano@gmail.com',
         }),
       });
 
@@ -43,7 +44,7 @@ export function ContactForm() {
       });
     } catch (error) {
       toast.error('Erreur lors de l\'envoi du message');
-      console.log("L'erreur est", error);
+      console.error('Erreur:', error);
     } finally {
       setIsLoading(false);
     }
@@ -63,71 +64,88 @@ export function ContactForm() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
         onSubmit={handleSubmit}
-        className="space-y-1 mx-auto w-full"
+        className="space-y-1 mx-auto w-full bg-white p-8 rounded-lg shadow-lg"
       >
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Contactez-nous</h2>
+        
         <div className="grid grid-cols-2 gap-4">
           <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              Nom
+            </label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Nom"
+              placeholder="Votre nom"
               value={formData.name}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
           <div>
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+              Prénom
+            </label>
             <input
               type="text"
               id="firstName"
               name="firstName"
-              placeholder="Prénom"
+              placeholder="Votre prénom"
               value={formData.firstName}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
         </div>
 
         <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            Email
+          </label>
           <input
             type="email"
             id="email"
             name="email"
-            placeholder="Adresse mail"
+            placeholder="Votre email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
 
         <div>
+          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+            Sujet
+          </label>
           <input
             type="text"
             id="subject"
             name="subject"
-            placeholder="Sujet"
+            placeholder="Sujet de votre message"
             value={formData.subject}
             onChange={handleChange}
             required
-            className="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
 
         <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+            Message
+          </label>
           <textarea
             id="message"
             name="message"
-            placeholder="Entrez ici votre message"
+            placeholder="Votre message"
             value={formData.message}
             onChange={handleChange}
             required
             rows={4}
-            className="mt-4 mb-4 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
 
@@ -136,7 +154,7 @@ export function ContactForm() {
           whileTap={{ scale: 0.95 }}
           type="submit"
           disabled={isLoading}
-          className="md:w-full mx-auto px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 flex items-center justify-center disabled:opacity-50"
+          className="w-full px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center justify-center disabled:opacity-50 mt-6"
         >
           <Send className="h-4 w-4 mr-2" />
           {isLoading ? 'Envoi en cours...' : 'Envoyer le message'}
@@ -147,27 +165,27 @@ export function ContactForm() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9 }}
+        className="bg-green-600 text-white p-8 rounded-lg shadow-lg"
       >
-        <div className="contactStyle relative mx-auto p-8 rounded-lg border-4 border-green-400">
-          <ul className="space-y-1 text-white">
-            <div className="flex gap-3">
-              <HomeIcon />
-              <li>Commune de goma</li>
-            </div>
-            <div className="flex gap-3">
-              <Globe />
-              <li>Goma, RDC</li>
-            </div>
-            <div className="flex gap-3">
-              <PhoneCall />
-              <li>+243 973 456 789</li>
-            </div>
-            <div className="flex gap-3">
-              <Mail />
-              <li>contact@impactecogroup.com</li>
-            </div>
-          </ul>
-        </div>
+        <h3 className="text-2xl font-bold mb-6">Nos Coordonnées</h3>
+        <ul className="space-y-4">
+          <li className="flex items-center">
+            <HomeIcon className="h-6 w-6 mr-3" />
+            <span>Commune de Goma</span>
+          </li>
+          <li className="flex items-center">
+            <Globe className="h-6 w-6 mr-3" />
+            <span>Goma, RDC</span>
+          </li>
+          <li className="flex items-center">
+            <PhoneCall className="h-6 w-6 mr-3" />
+            <span>+243 973 456 789</span>
+          </li>
+          <li className="flex items-center">
+            <Mail className="h-6 w-6 mr-3" />
+            <span>contact@impactecogroup.com</span>
+          </li>
+        </ul>
       </motion.div>
     </div>
   );

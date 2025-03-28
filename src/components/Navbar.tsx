@@ -28,6 +28,71 @@ export function Navbar() {
 
   return (
     <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 p-3 w-full">
+      <section className="bg-gray-800 text-white top-0 left-0 w-full z-50n">
+        <div className='flex'>
+          <div className="overflow-hidden ">
+            <div className="whitespace-nowrap animate-marquee-slow">
+              <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
+                || Découvrez notre nouvelle initiative de reboisement en RDC, une action qui transforme le paysage et soutient les communautés locales.
+              </p>
+              <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
+                || Lancement d'un programme de formation destiné aux jeunes entrepreneurs, ouvrant des portes vers des opportunités économiques durables.
+              </p>
+              <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
+                || Grâce à vos dons et soutiens, nous avons doublé notre impact en 2023, un témoignage puissant de l'engagement collectif pour un avenir meilleur.
+              </p>
+            </div>
+          </div>
+          <div>
+            {user ? (
+              <div className="flex items-center space-x-2 my-2">
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="text-gray-600 hover:text-green-600 transition-colors duration-200"
+                  >
+                    Admin Panel
+                  </Link>
+                )}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  // onClick={handleLogout}
+                  className="flex items-center px-2 border border-red-500 text-red-500 rounded-md hover:bg-red-50"
+                >
+                  <LogOut className="h-3 w-3 mr-1" />
+                  <p className='text-[15px]'>Déconnexion</p>
+                </motion.button>
+              </div>
+            ) : (
+              <div className="flex items-center my-2 mr-2 space-x-2">
+                <Link to="/login">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center px-2 py- border border-green-600 text-green-600 rounded-md hover:bg-green-50"
+                  >
+                    <LogIn className="h-3 w-3 mr-1" />
+                    <p className='text-[15px]'>Connexion</p>
+                  </motion.button>
+                </Link>
+                <Link to="/register">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center px-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                  >
+                    <UserPlus className="h-3 w-3 mr-1" />
+                    <p className='text-[15px]'>Inscription</p>
+                  </motion.button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+
+      </section>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -42,17 +107,16 @@ export function Navbar() {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`${
-                  isActive(item.path)
-                    ? 'text-green-600 border-b-4 border-green-600'
-                    : 'text-gray-600 hover:text-green-600'
-                } transition-colors duration-200`}
+                className={`${isActive(item.path)
+                  ? 'text-green-600 border-b-4 border-green-600'
+                  : 'text-gray-600 hover:text-green-600'
+                  } transition-colors duration-200`}
               >
                 {item.label}
               </Link>
             ))}
 
-            {user ? (
+            {/* {user ? (
               <div className="flex items-center space-x-4">
                 {user.role === 'admin' && (
                   <Link
@@ -95,7 +159,7 @@ export function Navbar() {
                   </motion.button>
                 </Link>
               </div>
-            )}
+            )} */}
 
             <Link to="/donate">
               <motion.button
@@ -146,11 +210,10 @@ export function Navbar() {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`block px-3 py-2 ${
-                  isActive(item.path)
-                    ? 'text-green-600 border-b-4 border-green-600'
-                    : 'text-gray-600 hover:text-green-600'
-                }`}
+                className={`block px-3 py-2 ${isActive(item.path)
+                  ? 'text-green-600 border-b-4 border-green-600'
+                  : 'text-gray-600 hover:text-green-600'
+                  }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
@@ -173,10 +236,11 @@ export function Navbar() {
                     handleLogout();
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-50"
+                  className="block w-full text-left px-2 py-2 text-red-600 hover:bg-red-50"
                 >
-                  <LogOut className="h-4 w-4 inline mr-2" />
-                  Déconnexion
+                  <LogOut className="h-3 w-3 inline mr-1" />
+                  <p className='text-[15px]'>Déconnexion</p>
+
                 </button>
               </>
             ) : (

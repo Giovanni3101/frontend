@@ -5,6 +5,7 @@ import { useChatStore } from '../stores/chatStore';
 import { useAuthStore } from '../stores/authStore';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { toast } from 'react-hot-toast';
 
 export function Chat() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -28,12 +29,14 @@ export function Chat() {
     e.preventDefault();
     if (!message.trim()) return;
 
-    if (!user && !guestName.trim()) {
-      setGuestName('Invité');
+    try {
+      const userName = user ? user.email : guestName || 'Invité';
+      await sendMessage(message, userName);
+      setMessage('');
+      toast.success('Message envoyé');
+    } catch (error) {
+      toast.error('Erreur lors de l\'envoi du message');
     }
-
-    await sendMessage(message, !user ? guestName || 'Invité' : undefined);
-    setMessage('');
   };
 
   return (
@@ -77,6 +80,9 @@ export function Chat() {
                       : 'mr-auto'
                   }`}
                 >
+                  <div className="text-xs text-gray-500 mb-1">
+                    {msg.userName || 'Anonyme'}
+                  </div>
                   <div
                     className={`inline-block p-3 rounded-lg ${
                       msg.userId === (user?._id || 'guest')
