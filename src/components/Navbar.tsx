@@ -28,7 +28,7 @@ export function Navbar() {
 
   return (
     <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 w-full">
-      <section className="bg-gray-800 text-white top-0 left-0 w-full z-50">
+      {/* <section className="bg-gray-800 text-white top-0 left-0 w-full z-50">
         <div className='flex'>
           <div className="overflow-hidden ">
             <div className="whitespace-nowrap animate-marquee-slow">
@@ -91,7 +91,7 @@ export function Navbar() {
           </div>
         </div>
 
-      </section>
+      </section> */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
@@ -116,7 +116,7 @@ export function Navbar() {
               </Link>
             ))}
 
-            {/* {user ? (
+            {user ? (
               <div className="flex items-center space-x-4">
                 {user.role === 'admin' && (
                   <Link
@@ -159,7 +159,7 @@ export function Navbar() {
                   </motion.button>
                 </Link>
               </div>
-            )} */}
+            )}
 
             <Link to="/donate">
               <motion.button
