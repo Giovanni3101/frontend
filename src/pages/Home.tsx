@@ -670,7 +670,6 @@ export function Home() {
 
             <div className="relative max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5" onMouseEnter={stopAutoSlide}
               onMouseLeave={startAutoSlide}>
-              <AnimatePresence mode="wait">
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 50 }}
@@ -695,7 +694,6 @@ export function Home() {
                     </div>
                   </div>
                 </motion.div>
-              </AnimatePresence>
             </div>
           </div>
         ) : (
@@ -710,7 +708,6 @@ export function Home() {
 
             <div className="relative max-w-3xl mt-10 mx-auto p-6 bg-white shadow-lg rounded-tl-full rounded-bl-full" onMouseEnter={stopAutoSlide}
               onMouseLeave={startAutoSlide}>
-              <AnimatePresence mode="wait">
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 50 }}
@@ -735,7 +732,6 @@ export function Home() {
                     </div>
                   </div>
                 </motion.div>
-              </AnimatePresence>
             </div>
           </div>
 
