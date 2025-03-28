@@ -27,8 +27,8 @@ export function Navbar() {
   };
 
   return (
-    <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 p-3 w-full">
-      <section className="bg-gray-800 text-white top-0 left-0 w-full z-50n">
+    <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 w-full">
+      <section className="bg-gray-800 text-white top-0 left-0 w-full z-50">
         <div className='flex'>
           <div className="overflow-hidden ">
             <div className="whitespace-nowrap animate-marquee-slow">
