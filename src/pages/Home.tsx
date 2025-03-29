@@ -182,9 +182,9 @@ export function Home() {
   };
 
   const images = [
-    "../src/img/wp2916561.webp",
-    "../src/img/30551-mi-1200x630-black-entrepreneur.webp",
-    "../src/img/concours2.jpg"
+    "https://th.bing.com/th/id/OIP.kNSaTvRSUGqek1v1u84eSQHaFQ?rs=1&pid=ImgDetMain",
+    "https://th.bing.com/th/id/OIP.k6UQi4MUX9fGrnHsrmtHFwHaD4?rs=1&pid=ImgDetMain",
+    ""
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0);

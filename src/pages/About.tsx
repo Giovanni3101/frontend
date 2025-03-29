@@ -256,7 +256,7 @@ export function About() {
         </div>
         <div className="mx-auto px-2 sm:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
