@@ -628,32 +628,31 @@ export function Home() {
                 Decouvrez quelques temoignages
               </p>
             </div>
-              <div className="max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className='flex space-x-6 align-center justify-center border-tl-full border-bl-full'>
-                    <div className=''>
-                      <img
-                        src={testimonials[index].image}
-                        alt={testimonials[index].name}
-                        className="rounded-full border-4 border-green-500"
-                      />
-                    </div>
-                    <div className=''>
-                      <h3 className="mt-4 text-lg font-bold text-black border-b">
-                        {testimonials[index].name}
-                      </h3>
-                      <p className="text-sm text-green-600">{testimonials[index].location}</p>
-                      <p className="mt-3 text-gray-800 italic">"{testimonials[index].story}"</p>
-                    </div>
+            <div className="max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className='flex space-x-6 align-center justify-center border-tl-full border-bl-full'>
+                  <div className=''>
+                    <img
+                      src={testimonials[index].image}
+                      alt={testimonials[index].name}
+                      className="rounded-full border-4 border-green-500"
+                    />
                   </div>
-                </motion.div>
-              </div>
+                  <div className=''>
+                    <h3 className="mt-4 text-lg font-bold text-black border-b">
+                      {testimonials[index].name}
+                    </h3>
+                    <p className="text-sm text-green-600">{testimonials[index].location}</p>
+                    <p className="mt-3 text-gray-800 italic">"{testimonials[index].story}"</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         ) : (
 
