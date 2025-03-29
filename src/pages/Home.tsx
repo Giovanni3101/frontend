@@ -182,7 +182,7 @@ export function Home() {
   };
 
   const images = [
-    "https://e1.pxfuel.com/desktop-wallpaper/596/576/desktop-wallpaper-digital-agriculture-agro.jpg",
+    "https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-HD-John-Deere-Wallpapers-Photos.jpg",
     "https://www.bdc.ca/globalassets/digizuite/30551-mi-1200x630-black-entrepreneur.png",
     "https://thumbs.dreamstime.com/b/black-woman-business-smile-portrait-desk-office-pride-career-job-as-leader-young-entrepreneur-person-happy-270338850.jpg"
   ]
