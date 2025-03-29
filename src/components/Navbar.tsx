@@ -33,7 +33,7 @@ export function Navbar() {
           <div className="overflow-hidden ">
             <div className="whitespace-nowrap animate-marquee-slow">
               <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
-              || Organiusation du forum economique à Génève en Partenariat avec la chambre de commerce de Génève et la Haute ecole de Génève
+              || Organisation du forum economique à Génève en Partenariat avec la chambre de commerce de Génève et la Haute ecole de Génève
               </p>
               <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
                 || Lancement d'un programme de formation destiné aux jeunes entrepreneurs, ouvrant des portes vers des opportunités économiques durables.
