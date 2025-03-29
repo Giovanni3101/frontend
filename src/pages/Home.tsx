@@ -22,10 +22,7 @@ import values from '../img/GettyImages-682151958.jpg';
 import energy from '../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg';
 import entre from '../img/PHOTO8.jpg';
 import FILLE2 from "../img/fille.jpg"
-import im from "../img/30551-mi-1200x630-black-entrepreneur.webp"
-import im1 from "../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg"
 import BRO1 from "../img/kev.jpg"
-import { useFetcher } from 'react-router-dom';
 // 061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg
 // 30551-mi-1200x630-black-entrepreneur.webp
 // GettyImages-682151958.jpg
