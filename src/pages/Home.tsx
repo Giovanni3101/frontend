@@ -182,9 +182,9 @@ export function Home() {
   };
 
   const images = [
-    "https://th.bing.com/th/id/OIP.kNSaTvRSUGqek1v1u84eSQHaFQ?rs=1&pid=ImgDetMain",
-    "https://th.bing.com/th/id/OIP.k6UQi4MUX9fGrnHsrmtHFwHaD4?rs=1&pid=ImgDetMain",
-    ""
+    "https://e1.pxfuel.com/desktop-wallpaper/596/576/desktop-wallpaper-digital-agriculture-agro.jpg",
+    "https://www.bdc.ca/globalassets/digizuite/30551-mi-1200x630-black-entrepreneur.png",
+    "https://thumbs.dreamstime.com/b/black-woman-business-smile-portrait-desk-office-pride-career-job-as-leader-young-entrepreneur-person-happy-270338850.jpg"
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0);
