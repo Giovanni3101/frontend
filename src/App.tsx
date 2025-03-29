@@ -23,6 +23,7 @@ import { Village } from './pages/Projects/Construction';
 import { Ecole} from './pages/Projects/Education';
 import { Ecologie } from './pages/Projects/Reboisement';
 import { Boite } from './pages/Projects/Startups';
+import { ScrolToTop } from './components/ScrolToTop'
 
 function App() {
   const { checkAuth } = useAuthStore();
@@ -34,6 +35,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrolToTop/>
         <div className="min-h-screen flex flex-col">
           <Navbar />
           <main className="flex-grow">
