@@ -71,12 +71,12 @@ export function ProjectCard({
 
             <div className="flex justify-between">
               <Link to="/#newsletter">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                <button className="bg-green-400 text-white px-4 py-2 rounded-md hover:bg-green-600">
                   S'abonner
                 </button>
               </Link>
               <Link to="/donate">
-                <button className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600">
+                <button className="bg-green-900 text-white px-4 py-2 rounded-md hover:bg-green-400">
                   Faire un don
                 </button>
               </Link>
@@ -84,7 +84,7 @@ export function ProjectCard({
 
             <button
               onClick={() => setModalIsOpen(false)}
-              className="mt-4 block w-full text-center text-gray-500 hover:text-gray-700"
+              className="mt-8 block w-full text-center text-white hover:text-gray-700 bg-red-500 p-2 rounded-lg"
             >
               Annuler
             </button>

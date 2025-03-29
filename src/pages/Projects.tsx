@@ -5,8 +5,6 @@ import energy from "../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg";
 import entre from "../img/PHOTO8.jpg";
 import village from "../img/village5.jpg"; 
 import startup from "../img/PHOTO12.jpg";
-import education from "../img/PHOTO6.jpg";
-import reboisement from "../img/reb.jpg";
 import concours from "../img/concours4.jpg";
 
 export function Projects() {

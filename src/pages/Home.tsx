@@ -11,8 +11,6 @@ import {
   Heart,
   Star,
   Loader,
-  MoveLeftIcon,
-  MoveRightIcon,
 } from 'lucide-react';
 import { ProjectCard } from '../components/ProjectCard';
 import { PartnerCard } from '../components/PartnerCard';
@@ -24,13 +22,10 @@ import values from '../img/GettyImages-682151958.jpg';
 import energy from '../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg';
 import entre from '../img/PHOTO8.jpg';
 import FILLE2 from "../img/fille.jpg"
+import im from "../img/30551-mi-1200x630-black-entrepreneur.webp"
+import im1 from "../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg"
 import BRO1 from "../img/kev.jpg"
-import concours from "../img/concours4.jpg";
-import BRO2 from "../img/bro.jpg"
-import BRO3 from "../img/gg.jpg"
-import FILLE1 from "../img/meuf.jpg"
-import FILLE3 from "../img/chr.jpg"
-
+import { useFetcher } from 'react-router-dom';
 // 061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg
 // 30551-mi-1200x630-black-entrepreneur.webp
 // GettyImages-682151958.jpg
@@ -87,34 +82,34 @@ export function Home() {
   ];
 
   const testimonials = [
-    // {
-    //   name: "Kethia mwenge",
-    //   location: "Kalemie, Tanganyika",
-    //   story:
-    //     "Grâce à Impact Eco Groupe, notre village a désormais accès à l’eau potable et à l’éducation pour nos enfants. Nous avons retrouvé l’espoir !",
-    //   image: FILLE2,
-    // },
-    // {
-    //   name: "isaac shema",
-    //   location: "Matadi, Kongo-centrale",
-    //   story:
-    //     "J’ai reçu un soutien pour lancer mon petit commerce. Aujourd’hui, je peux subvenir aux besoins de ma famille. Merci !",
-    //   image: BRO1,
-    // },
-    // {
-    //   name: "Nathy Mahamba",
-    //   location: "goma, nord-kivu",
-    //   story:
-    //     "Nos enfants peuvent enfin aller à l’école sans marcher des kilomètres. Un immense merci pour cette aide précieuse !",
-    //   image: FILLE2,
-    // },
-    // {
-    //   name: "Kevin Mulemberi",
-    //   location: "ariwara, haut-uelé",
-    //   story:
-    //     "Grâce à Impact Eco Groupe, notre village a désormais accès à l’eau potable et à l’éducation pour nos enfants. Nous avons retrouvé l’espoir !",
-    //   image: BRO1,
-    // },
+    {
+      name: "Kethia mwenge",
+      location: "Kalemie, Tanganyika",
+      story:
+        "Grâce à Impact Eco Groupe, notre village a désormais accès à l’eau potable et à l’éducation pour nos enfants. Nous avons retrouvé l’espoir !",
+      image: FILLE2,
+    },
+    {
+      name: "isaac shema",
+      location: "Matadi, Kongo-centrale",
+      story:
+        "J’ai reçu un soutien pour lancer mon petit commerce. Aujourd’hui, je peux subvenir aux besoins de ma famille. Merci !",
+      image: BRO1,
+    },
+    {
+      name: "Nathy Mahamba",
+      location: "goma, nord-kivu",
+      story:
+        "Nos enfants peuvent enfin aller à l’école sans marcher des kilomètres. Un immense merci pour cette aide précieuse !",
+      image: FILLE2,
+    },
+    {
+      name: "Kevin Mulemberi",
+      location: "ariwara, haut-uelé",
+      story:
+        "Grâce à Impact Eco Groupe, notre village a désormais accès à l’eau potable et à l’éducation pour nos enfants. Nous avons retrouvé l’espoir !",
+      image: BRO1,
+    },
     {
       name: "Giovanni MHS",
       location: "rutsuru, nord-kivu",
@@ -189,10 +184,34 @@ export function Home() {
     }
   };
 
+  const images = [
+    "../src/img/wp2916561.webp",
+    "../src/img/30551-mi-1200x630-black-entrepreneur.webp",
+    "../src/img/concours2.jpg"
+  ]
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const backgroundSlider = () => {
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }, []);
+  }
+
+  backgroundSlider()
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
-      {/* <section ref={heroRef} className="style2 min-h-screen pt-16 items-center">
+      <section ref={heroRef} className="min-h-screen pt-16 items-center transition-all duration-1000"
+        style={{
+          backgroundImage: `url(${images[currentIndex]})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-40">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -237,67 +256,8 @@ export function Home() {
             </div>
           </motion.div>
         </div>
-      </section> */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen pt-16 items-center"
-        onMouseLeave={startAutoSlide}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5 }}
-            className='style2 min-h-screen mt-[-50px]'
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-40">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8 }}
-                className="text-center"
-              >
-                <h1 className="mt-10 text-lg text-gray-900 sm:text-4xl md:text-6xl">
-                  <span className="block text-white">Innovation Durable en</span>
-                  <span className="block text-green-600 font-extrabold">
-                    République Démocratique du Congo
-                  </span>
-                </h1>
-                <p className="styleTexte relative rounded-full border-2 p-4 mt-8 mx-auto text-base sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                  Ensemble, construisons un avenir durable à travers des projets
-                  innovants en agriculture moderne, transformation écologique et
-                  développement socio-économique.
-                </p>
-                <div className="mt-6 mx-auto sm:flex sm:justify-center md:mt-8">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="rounded-md shadow"
-                  >
-                    <a
-                      href="#projects"
-                      className="bpp flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10"
-                    >
-                      Découvrir nos projets
-                    </a>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3"
-                  >
-                    <a
-                      href="/contact"
-                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
-                    >
-                      Nous contacter
-                    </a>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </section>
+
 
       {/* About section */}
       <section className="min-h-screen grid md:grid-cols-2 items-center bg-gray-100">
@@ -672,9 +632,7 @@ export function Home() {
                 Decouvrez quelques temoignages
               </p>
             </div>
-            <AnimatePresence mode="wait">
-              <div className="max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5" onMouseEnter={stopAutoSlide}
-                onMouseLeave={startAutoSlide}>
+              <div className="max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5">
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 50 }}
@@ -700,7 +658,6 @@ export function Home() {
                   </div>
                 </motion.div>
               </div>
-            </AnimatePresence>
           </div>
         ) : (
 

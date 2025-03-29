@@ -24,7 +24,6 @@ import reb from '../img/reb.jpg';
 import reb2 from '../img/reb2.jpg';
 import reb3 from '../img/REB3.jpg';
 import vision from '../img/30551-mi-1200x630-black-entrepreneur.webp'
-import values from '../img/GettyImages-682151958.jpg';
 import { Chat } from "../components/Chat";
 
 export function About() {
@@ -77,33 +76,6 @@ export function About() {
       role: 'Responsable Innovation',
       image: t3,
       bio: "Innovateur en solutions durables pour l'Afrique",
-    },
-  ];
-
-  const values = [
-    {
-      icon: Award,
-      title: 'Excellence',
-      description:
-        "Nous visons l'excellence dans tous nos projets et initiatives.",
-    },
-    {
-      icon: Users,
-      title: 'Collaboration',
-      description:
-        'Nous croyons en la force de la collaboration et du partenariat.',
-    },
-    {
-      icon: Target,
-      title: 'Impact',
-      description:
-        "Nous mesurons notre succès par l'impact positif sur les communautés.",
-    },
-    {
-      icon: Clock,
-      title: 'Durabilité',
-      description:
-        'Nous créons des solutions durables pour les générations futures.',
     },
   ];
 

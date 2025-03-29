@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CreditCard, Phone, AlertCircle, DollarSign, Wallet, CreditCard as VisaIcon } from 'lucide-react';
+import { CreditCard, Phone, AlertCircle, DollarSign, CreditCard as VisaIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import donate from '../img/gestionnaire-homme-noir.jpg';
 
