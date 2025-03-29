@@ -45,7 +45,7 @@ export function Navbar() {
           </div>
           <div>
             {user ? (
-              <div className="flex items-center space-x-2 my-2 mr-2">
+              <div className="flex items-center space-x-2 my-2">
                 {user.role === 'admin' && (
                   <Link
                     to="/admin"
@@ -60,17 +60,17 @@ export function Navbar() {
                   onClick={handleLogout}
                   className="flex items-center px-2 border border-red-500 text-red-500 rounded-md hover:bg-red-50"
                 >
-                  <LogOut className="h-3 w-3" />
-                  <p className='text-[15px] mr-4'>Déconnexion</p>
+                  <LogOut className="h-3 w-3 mr-1" />
+                  <p className='text-[15px]'>Déconnexion</p>
                 </motion.button>
               </div>
             ) : (
-              <div className="flex items-center my-2 mr-2 space-x-2">
+              <div className="flex items-center my-2 mr-2 space-x-2 mr-2">
                 <Link to="/login">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center px-2 py- border border-green-600 text-green-600 rounded-md hover:bg-green-50"
+                    className="flex items-center px-2 border border-green-600 text-green-600 rounded-md hover:bg-green-50"
                   >
                     <LogIn className="h-3 w-3 mr-1" />
                     <p className='text-[15px]'>Connexion</p>
