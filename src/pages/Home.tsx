@@ -202,7 +202,7 @@ export function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
-      <section ref={heroRef} className="min-h-screen pt-16 items-center transition-all duration-1000"
+      <section ref={heroRef} className="min-h-screen pt-16 items-center transition-all duration-1000 border-bl-[50px]"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
           backgroundSize: "cover",
