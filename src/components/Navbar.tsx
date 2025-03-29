@@ -57,7 +57,7 @@ export function Navbar() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  // onClick={handleLogout}
+                  onClick={handleLogout}
                   className="flex items-center px-2 border border-red-500 text-red-500 rounded-md hover:bg-red-50"
                 >
                   <LogOut className="h-3 w-3 mr-1" />
