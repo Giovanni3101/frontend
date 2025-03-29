@@ -630,8 +630,7 @@ export function Home() {
             </div>
             <div className="max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5">
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 5 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
@@ -667,10 +666,8 @@ export function Home() {
               <div className="relative max-w-3xl mt-10 mx-auto p-6 bg-white shadow-lg rounded-tl-full rounded-bl-full" onMouseEnter={stopAutoSlide}
                 onMouseLeave={startAutoSlide}>
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
                   <div className='flex space-x-6 align-center justify-center border-tl-full border-bl-full'>
