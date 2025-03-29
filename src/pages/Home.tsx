@@ -596,9 +596,10 @@ export function Home() {
       <section className="partner py-12 bg-white" id="partners">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 5 }}
+            initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-extrabold text-white">
