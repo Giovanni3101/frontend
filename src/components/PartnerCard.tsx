@@ -16,10 +16,10 @@ export function PartnerCard({
   return (
     <div className="partnerStyle relative">
       <motion.div
-        initial={{ opacity: 0, scale: 1.5 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.9 }}
+        transition={{ duration: 0.7 }}
         className="text-center border-2 border-green-600 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
       >
         <img src={logo} alt={name} className="h-24 object-contain mx-auto" />
