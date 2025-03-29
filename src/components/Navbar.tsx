@@ -45,7 +45,7 @@ export function Navbar() {
           </div>
           <div>
             {user ? (
-              <div className="flex items-center space-x-2 my-2">
+              <div className="flex items-center space-x-2 my-2 mr-2">
                 {user.role === 'admin' && (
                   <Link
                     to="/admin"
@@ -60,7 +60,7 @@ export function Navbar() {
                   onClick={handleLogout}
                   className="flex items-center px-2 border border-red-500 text-red-500 rounded-md hover:bg-red-50"
                 >
-                  <LogOut className="h-3 w-3 mr-2 pr-2" />
+                  <LogOut className="h-3 w-3" />
                   <p className='text-[15px] mr-4'>Déconnexion</p>
                 </motion.button>
               </div>
