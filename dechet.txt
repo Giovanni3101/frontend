@@ -1,0 +1,58 @@
+<motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className=""
+          >
+            <p>
+              L’histoire de notre entreprise commence à un moment où la République Démocratique du Congo était confrontée à des défis majeurs sur
+              le plan économique, environnemental et social. Avec une volonté commune de redonner à notre communauté et de créer des solutions
+              pérennes, nous avons fondé impact eco group en 2012. Nous avons démarré modestement, mais avec une vision
+              ambitieuse : celle de construire une entreprise résolument tournée vers l'avenir et en phase avec les besoins réels du terrain.
+            </p>
+            {/* <p className="mt-6">
+              Dès le début, nous avons compris que pour avoir un véritable impact, il fallait allier innovation et respect des traditions. C’est ainsi
+              que nos premières initiatives ont ciblé des solutions écologiques et durables. L'une de nos premières actions a été le lancement de
+              projets de reboisement pour contrer la déforestation qui menaçait notre écosystème. Grâce à la collaboration avec les communautés
+              locales, ces initiatives ont permis de restaurer des hectares de forêt, tout en créant des opportunités économiques et éducatives pour
+              des milliers de familles.
+            </p> */}
+
+            {/* Image de l'initiative de reboisement */}
+            <div className="mt-10">
+              <img src={foret} alt="Reboisement en RDC" className="w-full h-96 object-cover rounded-lg shadow-lg" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="mt-10 max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed"
+          >
+            <p className="mt-6">
+              Notre croissance a été alimentée par notre engagement sans faille envers les principes de transparence et d'intégrité. Nous avons
+              toujours mis un point d'honneur à garantir des processus ouverts et à travailler main dans la main avec nos partenaires locaux, les
+              ONG, les institutions gouvernementales et même les communautés les plus reculées. Cela nous a permis de bâtir une relation de
+              confiance durable et de maximiser l'impact de nos actions.
+            </p>
+
+            <p className="mt-6">
+              En parallèle de nos projets environnementaux, nous avons élargi nos activités à des secteurs comme l'éducation, l'infrastructure durable,
+              et la création d'emplois. L'objectif était de créer un cercle vertueux où chaque action contribue à une meilleure qualité de vie pour
+              les Congolais, tout en encourageant un développement économique local qui soit inclusif.
+            </p>
+
+            <p className="mt-6">
+              Aujourd’hui, nous sommes fiers de notre parcours. Nous avons élargi notre réseau et nos projets à travers toute la RDC, avec une
+              présence active dans des provinces telles que le Nord-Kivu, le Kasaï et Kinshasa. Nous avons eu le privilège de toucher directement plus
+              de 100 000 personnes à travers nos programmes de formation, de développement durable, et d'accès à la technologie. Grâce à notre
+              approche novatrice et collaborative, nous continuons à faire une différence tangible et mesurable dans la vie des Congolais.
+            </p>
+
+            <p className="mt-6">
+              Nous avons fait de notre impact social et environnemental une priorité, mais nous n'oublions jamais que chaque initiative doit être
+              soutenue par des solutions pratiques, réalisables et accessibles. Aujourd'hui, en collaborant avec des entrepreneurs locaux, des jeunes
+              talents et des communautés, nous ouvrons la voie à un avenir prospère pour les générations à venir.
+            </p>
+          </motion.div>

@@ -12,11 +12,12 @@ interface Comment {
   createdAt: string;
 }
 
-interface CommentsProps {
-  projectId: string;
-}
+// interface CommentsProps {
+//   projectId: string;
+// }
 
-export function Comments({ projectId }: CommentsProps) {
+// export function Comments({ projectId }: CommentsProps) {
+export function Comments() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -37,7 +38,7 @@ export function Comments({ projectId }: CommentsProps) {
         },
         body: JSON.stringify({
           ...formData,
-          projectId,
+          // projectId,
           adminEmail: 'giovannimahasano@gmail.com'
         }),
       });

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import energie from '../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg';
+import forum from '../img/PHOTO13.jpg';
 
 interface BlogPost {
   id: number;
@@ -24,11 +26,20 @@ export function Blog() {
     },
     {
       id: 2,
+      title: "Organisation d'un forum",
+      excerpt: "Organisation d'un forum économique à Génève en partenariat avec la chambre de commerce de Génève",
+      date: "12 Mars 2024",
+      author: "Kevin Mulemberi",
+      image: forum,
+      category: "Forum"
+    },
+    {
+      id: 2,
       title: "Énergies renouvelables : un avenir prometteur",
       excerpt: "Les perspectives de développement des énergies renouvelables en RDC...",
       date: "12 Mars 2024",
       author: "Marie Kabongo",
-      image: "https://images.unsplash.com/photo-1509390144016-4b8e8021f47c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: energie,
       category: "Énergie"
     },
     {
@@ -43,7 +54,7 @@ export function Blog() {
   ];
 
   return (
-    <div className="pt-24 pb-12 bg-gray-100">
+    <div className="pt-32 pb-12 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,11 +64,11 @@ export function Blog() {
         >
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog</h1>
           <p className="text-xl text-gray-600">
-            Actualités et insights sur le développement durable en RDC
+            Actualités et insights sur le développement 
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 lg:gap-20 gap-8">
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}

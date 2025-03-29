@@ -25,6 +25,11 @@ import energy from '../img/23f9f94f2fafda98a1e63c07b58ae78a.jpg';
 import entre from '../img/PHOTO8.jpg';
 import FILLE2 from "../img/fille.jpg"
 import BRO1 from "../img/kev.jpg"
+import concours from "../img/concours4.jpg";
+import BRO2 from "../img/bro.jpg"
+import BRO3 from "../img/gg.jpg"
+import FILLE1 from "../img/meuf.jpg"
+import FILLE3 from "../img/chr.jpg"
 
 // 061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg
 // 30551-mi-1200x630-black-entrepreneur.webp
@@ -667,9 +672,9 @@ export function Home() {
                 Decouvrez quelques temoignages
               </p>
             </div>
-
-            <div className="relative max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5" onMouseEnter={stopAutoSlide}
-              onMouseLeave={startAutoSlide}>
+            <AnimatePresence mode="wait">
+              <div className="max-w-xl pl-6 pr-6 pt-6 pb-6 bg-white shadow-lg mt-5" onMouseEnter={stopAutoSlide}
+                onMouseLeave={startAutoSlide}>
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 50 }}
@@ -694,7 +699,8 @@ export function Home() {
                     </div>
                   </div>
                 </motion.div>
-            </div>
+              </div>
+            </AnimatePresence>
           </div>
         ) : (
 
@@ -705,9 +711,9 @@ export function Home() {
             <p className="text-center mt-2 text-xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               Decouvrez quelques temoignages
             </p>
-
-            <div className="relative max-w-3xl mt-10 mx-auto p-6 bg-white shadow-lg rounded-tl-full rounded-bl-full" onMouseEnter={stopAutoSlide}
-              onMouseLeave={startAutoSlide}>
+            <AnimatePresence mode="wait">
+              <div className="relative max-w-3xl mt-10 mx-auto p-6 bg-white shadow-lg rounded-tl-full rounded-bl-full" onMouseEnter={stopAutoSlide}
+                onMouseLeave={startAutoSlide}>
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 50 }}
@@ -732,7 +738,9 @@ export function Home() {
                     </div>
                   </div>
                 </motion.div>
-            </div>
+              </div>
+            </AnimatePresence>
+
           </div>
 
         )}

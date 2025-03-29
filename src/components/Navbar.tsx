@@ -28,12 +28,12 @@ export function Navbar() {
 
   return (
     <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 w-full">
-      {/* <section className="bg-gray-800 text-white top-0 left-0 w-full z-50">
+      <section className="bg-gray-800 text-white top-0 left-0 w-full z-50">
         <div className='flex'>
           <div className="overflow-hidden ">
             <div className="whitespace-nowrap animate-marquee-slow">
               <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
-                || Découvrez notre nouvelle initiative de reboisement en RDC, une action qui transforme le paysage et soutient les communautés locales.
+              || Organiusation du forum economique à Génève en Partenariat avec la chambre de commerce de Génève et la Haute ecole de Génève
               </p>
               <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
                 || Lancement d'un programme de formation destiné aux jeunes entrepreneurs, ouvrant des portes vers des opportunités économiques durables.
@@ -91,7 +91,7 @@ export function Navbar() {
           </div>
         </div>
 
-      </section> */}
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
@@ -116,7 +116,7 @@ export function Navbar() {
               </Link>
             ))}
 
-            {user ? (
+            {/* {user ? (
               <div className="flex items-center space-x-4">
                 {user.role === 'admin' && (
                   <Link
@@ -159,7 +159,7 @@ export function Navbar() {
                   </motion.button>
                 </Link>
               </div>
-            )}
+            )} */}
 
             <Link to="/donate">
               <motion.button
@@ -203,7 +203,7 @@ export function Navbar() {
           animate={{ opacity: 1, x: 12 }}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0, z: -20 }}
-          className="md:hidden absolute bg-white w-4/5 mt-3 right-3 min-h-screen classe"
+          className="md:hidden absolute mt-[-1px] bg-white w-4/5 mt-3 right-3 min-h-screen classe"
         >
           <div className="class px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => (
@@ -220,7 +220,7 @@ export function Navbar() {
               </Link>
             ))}
 
-            {user ? (
+            {/* {user ? (
               <>
                 {user.role === 'admin' && (
                   <Link
@@ -262,7 +262,7 @@ export function Navbar() {
                   Inscription
                 </Link>
               </>
-            )}
+            )} */}
 
             <Link to="/donate" onClick={() => setIsMenuOpen(false)}>
               <button className="w-full text-left bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700">

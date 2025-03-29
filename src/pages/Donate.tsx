@@ -9,7 +9,6 @@ const paymentMethods = [
   { id: 'visa', label: 'Visa', icon: VisaIcon },
   { id: 'airtel', label: 'Airtel Money', icon: Phone },
   { id: 'orange', label: 'Orange Money', icon: Phone },
-  { id: 'mpesa', label: 'M-Pesa', icon: Wallet },
 ];
 
 const donationAmounts = [10, 20, 50, 100, 200, 500];
@@ -40,28 +39,13 @@ export function Donate() {
   return (
     <div className="pt-24 pb-12 bg-gray-100 min-h-screen">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl font-bold text-gray-900 mt-4 mb-4">
-            Faire un don
-          </h1>
-          <p className="text-xl text-gray-600">
-            Soutenez nos projets pour un développement durable en RDC
-          </p>
-        </motion.div>
-
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-6"
+            className="space-y-6 pt-10"
           >
-            <img src={donate} alt="donate_picture" className="w-full rounded-lg shadow-xl" />
             <div className="bg-white rounded-lg p-6 shadow-lg">
               <h3 className="text-xl font-semibold mb-4">Pourquoi faire un don ?</h3>
               <ul className="space-y-4">
@@ -79,6 +63,7 @@ export function Donate() {
                 </li>
               </ul>
             </div>
+            <img src={donate} alt="donate_picture" className="w-full rounded-lg shadow-xl" />
           </motion.div>
 
           <motion.div
@@ -103,11 +88,10 @@ export function Donate() {
                         setAmount(amt.toString());
                         setCustomAmount(false);
                       }}
-                      className={`p-3 border rounded-lg text-center ${
-                        amount === amt.toString() && !customAmount
+                      className={`p-3 border rounded-lg text-center ${amount === amt.toString() && !customAmount
                           ? 'border-green-500 bg-green-50 text-green-700'
                           : 'border-gray-200 hover:border-green-500'
-                      }`}
+                        }`}
                     >
                       ${amt}
                     </motion.button>
@@ -142,11 +126,10 @@ export function Donate() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setPaymentMethod(method.id)}
-                      className={`p-4 border rounded-lg flex items-center justify-center ${
-                        paymentMethod === method.id
+                      className={`p-4 border rounded-lg flex items-center justify-center ${paymentMethod === method.id
                           ? 'border-green-500 bg-green-50'
                           : 'border-gray-200'
-                      }`}
+                        }`}
                     >
                       <method.icon className="h-6 w-6 mr-2" />
                       <span>{method.label}</span>

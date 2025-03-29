@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import { useState } from 'react';
+
+Modal.setAppElement('#root');
 
 interface ProjectCardProps {
   title: string;
@@ -17,6 +21,8 @@ export function ProjectCard({
   category,
   link,
 }: ProjectCardProps) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -42,6 +48,48 @@ export function ProjectCard({
             <ArrowRight className="ml-2 h-4 w-4" />
           </button>
         </Link>
+      </div>
+
+      {/* Bouton qui ouvre le modal */}
+      <div className="p-6">
+        <button
+          onClick={() => setModalIsOpen(true)}
+          className="w-full text-left bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700"
+        >
+          PARTICIPER
+        </button>
+
+        {/* Modal d'alerte avec options */}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        >
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Choisissez une action</h2>
+            <p className="text-gray-600 mb-4">Souhaitez-vous vous abonner à notre newsletter ou faire un don ?</p>
+
+            <div className="flex justify-between">
+              <Link to="/#newsletter">
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                  S'abonner
+                </button>
+              </Link>
+              <Link to="/donate">
+                <button className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600">
+                  Faire un don
+                </button>
+              </Link>
+            </div>
+
+            <button
+              onClick={() => setModalIsOpen(false)}
+              className="mt-4 block w-full text-center text-gray-500 hover:text-gray-700"
+            >
+              Annuler
+            </button>
+          </div>
+        </Modal>
       </div>
     </motion.div>
   );

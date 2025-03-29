@@ -18,6 +18,11 @@ import { Admin } from './pages/Admin';
 import { LoginForm } from './components/auth/LoginForm';
 import { RegisterForm } from './components/auth/RegisterForm';
 import { PrivateRoute } from './components/auth/PrivateRoute';
+import { Web } from './pages/Projects/Concours';
+import { Village } from './pages/Projects/Construction';
+import { Ecole} from './pages/Projects/Education';
+import { Ecologie } from './pages/Projects/Reboisement';
+import { Boite } from './pages/Projects/Startups';
 
 function App() {
   const { checkAuth } = useAuthStore();
@@ -49,6 +54,11 @@ function App() {
                 path="/projects/formation-professionnelle"
                 element={<Formation />}
               />
+              <Route path="/projects/concours" element={<Web />} />
+              <Route path="/projects/construction-village" element={<Village />} />
+              <Route path="/projects/reboisement" element={<Ecole />} />
+              <Route path="/projects/startups" element={<Boite/>} />
+              <Route path="/projects/education" element={<Ecologie />} />
               <Route
                 path="/admin"
                 element={
