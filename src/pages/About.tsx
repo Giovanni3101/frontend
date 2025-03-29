@@ -17,6 +17,8 @@ import t1 from '../img/t-3.png';
 import t2 from '../img/t-5.jpg';
 import t3 from '../img/t-3.png';
 import foret from '../img/foret.jpg';
+import b from '../img/061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg'
+import b1 from '../img/istockphoto-1215107354-612x612.jpg'
 import foret1 from '../img/PORI.webp';
 import group from '../img/GettyImages-682151958.jpg'
 import back from '../img/enfant.jpg';
@@ -139,7 +141,7 @@ export function About() {
             className="text-center"
           >
             <div className="md:mt-10 mb-10">
-              <img src={foret} alt="about" className="" />
+              <img src={b} alt="about" className="" />
             </div>
           </motion.div>
         </div>
@@ -189,7 +191,7 @@ export function About() {
             className="text-center"
           >
             <div className="md:mt-10 mb-10">
-              <img src={foret1} alt="about" className="" />
+              <img src={b1} alt="about" className="" />
             </div>
           </motion.div>
         </div>
