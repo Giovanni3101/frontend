@@ -11,6 +11,9 @@ import {
   Heart,
   Star,
   Loader,
+  Award,
+  Users,
+  Clock
 } from 'lucide-react';
 import { ProjectCard } from '../components/ProjectCard';
 import { PartnerCard } from '../components/PartnerCard';
@@ -484,84 +487,78 @@ export function Home() {
 
       {/* Values setction */}
       <section className="grid md:grid-cols-2 items-center bg-green-900">
-        <div className="max-w-7xl max-w-7xl mx-auto">
-          <div className="m-10 space-y-2 px-2 md:space-y-0 md:grid md:gap-x-4 md:gap-y-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="relative"
-            >
-              <h3 className="text-2xl text-green-600 mt-6 border-b border-b-4 mb-6 text-center pb-3">
-                NOS VALEURS
-              </h3>
-              <div className="bg-white p-4 rounded-full absolute flex items-center justify-center text-white">
-                <Heart className="h-6 w-6 text-black" />
+              <div className="max-w-7xl max-w-7xl mx-auto">
+                <div className="m-10 space-y-2 px-2 md:space-y-0 md:grid md:gap-x-4 md:gap-y-2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="relative"
+                  >
+                    <h3 className="text-2xl text-green-600 mt-6 border-b border-b-4 mb-6 text-center pb-3">
+                      NOS VALEURS
+                    </h3>
+                    <div className="bg-white p-4 rounded-full absolute flex items-center justify-center text-white">
+                      <Award className="h-6 w-6 text-black" />
+                    </div>
+                    <p className="ml-16 text-lg leading-6 font-medium text-green-600">
+                      Excelence
+                    </p>
+                    <p className="mt-2 ml-16 text-base text-white">
+                      Nous visons l'excellence dans tous nos projets et initiatives.
+                    </p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    className="relative"
+                  >
+                    <div className="bg-white p-4 rounded-full absolute flex items-center justify-center bg-gray-400 text-white">
+                      <Clock className="h-6 w-6 text-black" />
+                    </div>
+                    <p className="ml-16 text-lg leading-6 font-medium text-green-600">
+                      Durabilité
+                    </p>
+                    <p className="mt-2 ml-16 text-base text-white">
+                      Des experts passionnés par le développement durable
+                    </p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                    className="relative"
+                  >
+                    <div className="bg-white p-4 rounded-full absolute flex items-center justify-center bg-gray-400 text-white">
+                      <Users className="h-6 w-6 text-black" />
+                    </div>
+                    <p className="ml-16 text-lg leading-6 font-medium text-green-600">
+                      Collaboration
+                    </p>
+                    <p className="mt-2 ml-16 text-base text-white">
+                      Nous croyons en la force de la collaboration et du partenariat.
+                    </p>
+                  </motion.div>
+                </div>
               </div>
-              <p className="ml-16 text-lg leading-6 font-medium text-green-600">
-                Engagés pour l’Afrique
-              </p>
-              <p className="mt-2 ml-16 text-base text-white">
-                En tant que catalyseur de projets de développement, nous sommes
-                profondément engagés pour le développement socio-économique
-                durable de l’Afrique.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="relative"
-            >
-              <div className="bg-white p-4 rounded-full absolute flex items-center justify-center bg-gray-400 text-white">
-                <Star className="h-6 w-6 text-black" />
+              <div className="mx-auto px-2 sm:px-8 lg:px-12">
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="text-center"
+                >
+                  <div className="md:mt-10 mb-10">
+                    <img src={values} alt="about" className="w-120 md:h-" />
+                  </div>
+                </motion.div>
               </div>
-              <p className="ml-16 text-lg leading-6 font-medium text-green-600">
-                Pour un avenir durable
-              </p>
-              <p className="mt-2 ml-16 text-base text-white">
-                Notre mission est d’identifier les défis et opportunités
-                économiques locales, et de mettre en place des projets de
-                développement innovants. développement
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="relative"
-            >
-              <div className="bg-white p-4 rounded-full absolute flex items-center justify-center bg-gray-400 text-white">
-                <Loader className="h-6 w-6 text-black" />
-              </div>
-              <p className="ml-16 text-lg leading-6 font-medium text-green-600">
-                Pour une RDC plus prospère
-              </p>
-              <p className="mt-2 ml-16 text-base text-white">
-                Nous collaborons avec les organisations internationales et
-                mobilisons les ressources nécessaires pour la mise en œuvre de
-                projets socio-économiques durables en RDC.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-        <div className="mx-auto px-2 sm:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-center"
-          >
-            <div className="md:mt-10 mb-10">
-              <img src={values} alt="about" className="w-120 md:h-96" />
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            </section>
 
       {/* Projects Section */}
       <section
@@ -698,7 +695,7 @@ export function Home() {
 
 
       {/* Newsletter Section */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50" id='newsletter'>
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
