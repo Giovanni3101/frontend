@@ -2,22 +2,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-
-.bg-animated{
-  /* @apply bg-cover bg-center transition-all duration-500 ease-in-out; */
-  animation: bgSlide 9s infinite linear;
-  background-size: cover;
-  background-position: center;
-  transition: background-image 0.5s ease-in-out; 
-}
-
-@keyframes bgSlide{
-  0% {background-image: url('../src/img/061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg');}
-  33% {background-image: url('../src/img/23f9f94f2fafda98a1e63c07b58ae78a.jpg');}
-  66% {background-image: url('../src/img/30551-mi-1200x630-black-entrepreneur.webp');}
-  100% {background-image: url('../src/img/33c468_0949ee2090294f53be2ed04ffa04b262~mv2.webp');}
-}
-
 .styleTexte {
   z-index: 1;
 }
