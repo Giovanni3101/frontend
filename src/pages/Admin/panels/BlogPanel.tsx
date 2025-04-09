@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Trash2, Edit2, Check, X } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { API_BASE_URL } from '../../../components/config/api';
 
 interface BlogPost {
   _id: string;
@@ -24,7 +25,7 @@ export function BlogPanel() {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://serverisigsite.onrender.com/api/blog', {
+      const response = await fetch(`${API_BASE_URL}/api/blog`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -42,7 +43,7 @@ export function BlogPanel() {
   const handleDeletePost = async (postId: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://serverisigsite.onrender.com/api/blog/${postId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/blog/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -67,7 +68,7 @@ export function BlogPanel() {
   const handleSaveEdit = async (postId: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://serverisigsite.onrender.com/api/blog/${postId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/blog/${postId}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
