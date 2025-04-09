@@ -58,7 +58,6 @@ export function Projects() {
       link: "/projects/startups",
     }, 
   ];
-
   return (
     <div className="pt-32 pb-12 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

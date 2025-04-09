@@ -76,7 +76,6 @@ export function Boite() {
                   MVWAssociation est une association des jeunes conscients, ambitieux près pour le changement positif et intégral de toute la communauté de congolaise et surtout de la communauté de la ville de GOMA avec quatre départements; la science et technologie, l'art, l'humanisme et la politique
                   MVWAssociation est une association des jeunes conscients, ambitieux près pour le changement positif et intégral de toute la communauté de congolaise et surtout de la communauté de la ville de GOMA avec quatre départements; la science et technologie, l'art, l'humanisme et la politique
                   MVWAssociation est une association des jeunes conscients, ambitieux près pour le changement positif et intégral de toute la communauté de congolaise et surtout de la communauté de la ville de GOMA avec quatre départements; la science et technologie, l'art, l'humanisme et la politique
-                  MVWAssociation est une association des jeunes conscients, ambitieux près pour le changement positif et intégral de toute la communauté de congolaise et surtout de la communauté de la ville de GOMA avec quatre départements; la science et technologie, l'art, l'humanisme et la politique
                 </p>
               </motion.div>
             </div>

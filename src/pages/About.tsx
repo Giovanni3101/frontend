@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import {
   Award,
   Users,
-  Target,
   Clock,
   Facebook,
   Instagram,
@@ -16,10 +15,8 @@ import {
 import t1 from '../img/t-3.png';
 import t2 from '../img/t-5.jpg';
 import t3 from '../img/t-3.png';
-import foret from '../img/foret.jpg';
 import b from '../img/061475162988-web-tete-3dm0ek4nrtcistznyl0mps.jpeg'
 import b1 from '../img/istockphoto-1215107354-612x612.jpg'
-import foret1 from '../img/PORI.webp';
 import group from '../img/GettyImages-682151958.jpg'
 import back from '../img/enfant.jpg';
 import reb from '../img/reb.jpg';
@@ -134,7 +131,7 @@ export function About() {
       < section className="grid md:grid-cols-2 items-center bg-white-900" >
         <div className="mx-auto px-2 sm:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -184,7 +181,7 @@ export function About() {
         </div>
         <div className="mx-auto px-2 sm:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}

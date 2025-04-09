@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { Menu, X, LogIn, UserPlus, LogOut } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
 import logo from '../img/LOGO.png';
+// import { useTranslation } from "react-i18next";
+
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +14,11 @@ export function Navbar() {
   const { user, logout } = useAuthStore();
 
   const isActive = (path: string) => location.pathname === path;
+
+  // const { t, i18n } = useTranslation();
+  // const changeLanguage = (lang: string) => {
+  //   i18n.changeLanguage(lang);
+  // };
 
   const navItems = [
     { path: '/', label: 'Accueil' },
@@ -30,10 +37,14 @@ export function Navbar() {
     <nav className="bg-white/10 backdrop-blur-lg shadow-md fixed z-10 w-full">
       <section className="bg-gray-800 text-white top-0 left-0 w-full z-50">
         <div className='flex'>
+          {/* <div className="flex justify-between pl-2 pr-2 bg-gray-800 text-white">
+          inp
+          </div> */}
+
           <div className="overflow-hidden ">
             <div className="whitespace-nowrap animate-marquee-slow">
               <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
-              || Organisation du forum economique à Génève en Partenariat avec la chambre de commerce de Génève et la Haute ecole de Génève
+                || Organisation du forum economique à Génève en Partenariat avec la chambre de commerce de Génève et la Haute ecole de Génève
               </p>
               <p className="inline-block px-8 py-2 text-sm font-light leading-relaxed tracking-normal">
                 || Lancement d'un programme de formation destiné aux jeunes entrepreneurs, ouvrant des portes vers des opportunités économiques durables.
