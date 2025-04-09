@@ -29,11 +29,13 @@ export function Donate() {
       toast.success('Don effectué avec succès !');
       setAmount('');
       setCustomAmount(false);
-    } catch (error) {
-      toast.error('Erreur lors du traitement du don');
+    }catch (error) {
+      console.error(error); // Afficher l'erreur dans la console pour débogage
+      toast.error(`Erreur: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
     } finally {
       setIsLoading(false);
     }
+    
   };
 
   return (

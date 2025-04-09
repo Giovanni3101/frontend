@@ -3,8 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, LogIn, UserPlus, LogOut } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
+import { useTranslation } from 'react-i18next';
 import logo from '../img/LOGO.png';
-// import { useTranslation } from "react-i18next";
+
 
 
 export function Navbar() {
@@ -15,18 +16,25 @@ export function Navbar() {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // const { t, i18n } = useTranslation();
-  // const changeLanguage = (lang: string) => {
-  //   i18n.changeLanguage(lang);
-  // };
+    
 
-  const navItems = [
-    { path: '/', label: 'Accueil' },
-    { path: '/about', label: 'À propos' },
-    { path: '/projects', label: 'Projets' },
-    { path: '/news', label: 'Actualités' },
-    { path: '/contact', label: 'Contact' },
-  ];
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+  
+  const [isOpen, setIsOpen] = useState(false);
+
+ const { t, i18n } = useTranslation();
+
+const navItems = [
+  { path: '/', label: t('nav.home') },
+  { path: '/about', label: t('nav.about') },
+  { path: '/projects', label: t('nav.projects') },
+  { path: '/news', label: t('nav.news') },
+  { path: '/contact', label: t('nav.contact') },
+
+
+];
 
   const handleLogout = () => {
     logout();
@@ -54,6 +62,45 @@ export function Navbar() {
               </p>
             </div>
           </div>
+          <div className="relative inline-block text-left">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="inline-flex justify-center items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md"
+      >
+        🌐 
+        <svg
+          className="ml-2 w-4 h-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="absolute mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+          <div className="py-1 flex flex-col">
+            <button
+              onClick={() => { changeLanguage('fr'); setIsOpen(false); }}
+              className="px-4 py-2 text-sm hover:bg-gray-100 flex items-center"
+            >
+              🇫🇷 Français
+            </button>
+            <button
+              onClick={() => { changeLanguage('en'); setIsOpen(false); }}
+              className="px-4 py-2 text-sm hover:bg-gray-100 flex items-center"
+            >
+              🇬🇧 English
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
           <div>
             {user ? (
               <div className="flex items-center space-x-2 my-2">

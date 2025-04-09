@@ -30,6 +30,7 @@ export function UsersPanel() {
       const data = await response.json();
       setUsers(data);
     } catch (error) {
+      console.error(error);
       toast.error('Erreur lors du chargement des utilisateurs');
     } finally {
       setIsLoading(false);
@@ -49,8 +50,10 @@ export function UsersPanel() {
       setUsers(users.filter(user => user._id !== userId));
       toast.success('Utilisateur supprimé avec succès');
     } catch (error) {
-      toast.error('Erreur lors de la suppression de l\'utilisateur');
+      console.error(error);
+      toast.error('Erreur lors de la modification du rôle');
     }
+    
   };
 
   const handleToggleRole = async (userId: string, currentRole: string) => {
@@ -71,6 +74,7 @@ export function UsersPanel() {
       ));
       toast.success('Rôle modifié avec succès');
     } catch (error) {
+      console.error(error);
       toast.error('Erreur lors de la modification du rôle');
     }
   };
