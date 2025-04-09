@@ -23,7 +23,7 @@ export function MessagesPanel() {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://serverisigsite.onrender.com/api/messages', {
+      const response = await fetch('https://serverisigsite.onrender.com/api/messages', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -41,7 +41,7 @@ export function MessagesPanel() {
   const handleDeleteMessage = async (messageId: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://serverisigsite.onrender.com/api/messages/${messageId}`, {
+      const response = await fetch(`https://serverisigsite.onrender.com/api/messages/${messageId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

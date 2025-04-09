@@ -22,7 +22,7 @@ export function SettingsPanel() {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://serverisigsite.onrender.com/api/settings', {
+      const response = await fetch('https://serverisigsite.onrender.com/api/settings', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

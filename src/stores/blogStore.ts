@@ -70,7 +70,7 @@ export const useBlogStore = create<BlogStore>((set) => ({
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Not authenticated');
 
-      const response = await fetch(`http://serverisigsite.onrender.com/api/blog/${id}`, {
+      const response = await fetch(`https://serverisigsite.onrender.com/api/blog/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export const useBlogStore = create<BlogStore>((set) => ({
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Not authenticated');
 
-      const response = await fetch(`http://serverisigsite.onrender.com/api/blog/${id}`, {
+      const response = await fetch(`https://serverisigsite.onrender.com/api/blog/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

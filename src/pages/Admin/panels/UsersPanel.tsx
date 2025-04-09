@@ -21,7 +21,7 @@ export function UsersPanel() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://serverisigsite.onrender.com/api/users', {
+      const response = await fetch('https://serverisigsite.onrender.com/api/users', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -39,7 +39,7 @@ export function UsersPanel() {
   const handleDeleteUser = async (userId: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://serverisigsite.onrender.com/api/users/${userId}`, {
+      const response = await fetch(`https://serverisigsite.onrender.com/api/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -57,7 +57,7 @@ export function UsersPanel() {
     try {
       const token = localStorage.getItem('token');
       const newRole = currentRole === 'admin' ? 'user' : 'admin';
-      const response = await fetch(`http://serverisigsite.onrender.com/api/users/${userId}/role`, {
+      const response = await fetch(`https://serverisigsite.onrender.com/api/users/${userId}/role`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
