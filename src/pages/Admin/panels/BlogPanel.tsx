@@ -31,7 +31,7 @@ export function BlogPanel() {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/blog', {
+      const response = await fetch('https://serverisigsite.onrender.com/api/blog', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -50,7 +50,7 @@ export function BlogPanel() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/blog', {
+      const response = await fetch('https://serverisigsite.onrender.com/api/blog', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -80,7 +80,7 @@ export function BlogPanel() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/upload', {
+      const response = await fetch('https://serverisigsite.onrender.com/api/upload', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

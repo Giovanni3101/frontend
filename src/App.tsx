@@ -64,7 +64,9 @@ function App() {
               <Route
                 path="/admin"
                 element={
-                    <Admin />}
+                  <PrivateRoute adminOnly>
+                    <Admin />
+                  </PrivateRoute>}
               />
               <Route
                 path="/contact"
