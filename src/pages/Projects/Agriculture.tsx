@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Comments } from '../../components/Comment';
 import { ProjectCard } from '../../components/ProjectCard';
 import p1 from '../../img/istockphoto-1500695136-170667a.webp';
@@ -103,15 +104,6 @@ export function Agriculture() {
                   surtout de la communauté de la ville de GOMA avec quatre
                   départements; la science et technologie, l'art, l'humanisme et
                   la politique MVWAssociation est une association des jeunes
-                  conscients, ambitieux près pour le changement positif et
-                  intégral de toute la communauté de congolaise et surtout de la
-                  communauté de la ville de GOMA avec quatre départements; la
-                  science et technologie, l'art, l'humanisme et la politique
-                  MVWAssociation est une association des jeunes conscients,
-                  ambitieux près pour le changement positif et intégral de toute
-                  la communauté de congolaise et surtout de la communauté de la
-                  ville de GOMA avec quatre départements; la science et
-                  technologie, l'art, l'humanisme et la politique
                 </p>
               </motion.div>
             </div>
@@ -146,6 +138,20 @@ export function Agriculture() {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link to='/projects'>
+              <button
+                className="w-1/2 bg-green-600 mx-auto mt-10 mb-[-30px] text-white flex justify-center align-center text-center px-3 py-2 rounded-md hover:bg-green-700"
+              >
+                Voir plus
+              </button>
+            </Link>
+          </motion.div>
         </div>
       </section>
       <section className="pb-12 pt-12 md:mt-[-80px]">
@@ -157,7 +163,7 @@ export function Agriculture() {
           className="relative"
         >
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Comments />
+            <Comments projectId="agriculture"/>
           </div>
         </motion.div>
       </section>

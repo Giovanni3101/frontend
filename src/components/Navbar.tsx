@@ -12,7 +12,10 @@ export function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-
+  const giovAdmin = {
+    email: 'giovannimahasano@gmail.com',
+    password: 'J.3101josp'
+  }
   const isActive = (path: string) => location.pathname === path;
 
   // const { t, i18n } = useTranslation();
@@ -57,7 +60,9 @@ export function Navbar() {
           <div>
             {user ? (
               <div className="flex items-center space-x-2 my-2">
-                {user.role === 'admin' && (
+                {user.role === 'admin' ? (
+                  <div>salut</div>
+                ): (
                   <Link
                     to="/admin"
                     className="text-gray-600 hover:text-green-600 transition-colors duration-200"
@@ -120,7 +125,7 @@ export function Navbar() {
                 to={item.path}
                 className={`${isActive(item.path)
                   ? 'text-green-600 border-b-4 border-green-600'
-                  : 'text-gray-600 hover:text-green-600'
+                  : 'text-gray-400 hover:text-green-600'
                   } transition-colors duration-200`}
               >
                 {item.label}
@@ -187,7 +192,7 @@ export function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-600 hover:text-gray-900 w-12"
+              className="text-gray-400 hover:text-gray-900 w-12"
             >
               <motion.div
                 initial={{ opacity: 0, y: -10 }}

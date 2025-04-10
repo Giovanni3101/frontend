@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Trash2, Edit2, Check, X } from 'lucide-react';
+import { FileText, Trash2, Edit2, Check, X, Plus, Image } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 interface BlogPost {
   _id: string;
   title: string;
   content: string;
+  image: string;
   published: boolean;
   createdAt: string;
 }
@@ -14,8 +15,14 @@ interface BlogPost {
 export function BlogPanel() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCreating, setIsCreating] = useState(false);
   const [editingPost, setEditingPost] = useState<string | null>(null);
-  const [editForm, setEditForm] = useState({ title: '', content: '' });
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    image: '',
+    published: false
+  });
 
   useEffect(() => {
     fetchPosts();
@@ -24,7 +31,7 @@ export function BlogPanel() {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://serverisigsite.onrender.com/api/blog', {
+      const response = await fetch('http://localhost:3000/api/blog', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -39,51 +46,55 @@ export function BlogPanel() {
     }
   };
 
-  const handleDeletePost = async (postId: string) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://serverisigsite.onrender.com/api/blog/${postId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      if (!response.ok) throw new Error('Erreur lors de la suppression');
-      setPosts(posts.filter(post => post._id !== postId));
-      toast.success('Article supprimé avec succès');
-    } catch (error) {
-      toast.error('Erreur lors de la suppression de l\'article');
-    }
-  };
-
-  const handleEditPost = async (postId: string) => {
-    const post = posts.find(p => p._id === postId);
-    if (post) {
-      setEditingPost(postId);
-      setEditForm({ title: post.title, content: post.content });
-    }
-  };
-
-  const handleSaveEdit = async (postId: string) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`https://serverisigsite.onrender.com/api/blog/${postId}`, {
-        method: 'PATCH',
+      const response = await fetch('http://localhost:3000/api/blog', {
+        method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(editForm)
+        body: JSON.stringify(formData)
       });
-      if (!response.ok) throw new Error('Erreur lors de la modification');
+
+      if (!response.ok) throw new Error('Erreur lors de la création');
       
-      setPosts(posts.map(post => 
-        post._id === postId ? { ...post, ...editForm } : post
-      ));
-      setEditingPost(null);
-      toast.success('Article modifié avec succès');
+      const newPost = await response.json();
+      setPosts([newPost, ...posts]);
+      setIsCreating(false);
+      setFormData({ title: '', content: '', image: '', published: false });
+      toast.success('Article créé avec succès');
     } catch (error) {
-      toast.error('Erreur lors de la modification de l\'article');
+      toast.error('Erreur lors de la création de l\'article');
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3000/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (!response.ok) throw new Error('Erreur lors du téléchargement');
+      
+      const { url } = await response.json();
+      setFormData(prev => ({ ...prev, image: url }));
+      toast.success('Image téléchargée avec succès');
+    } catch (error) {
+      toast.error('Erreur lors du téléchargement de l\'image');
     }
   };
 
@@ -92,8 +103,93 @@ export function BlogPanel() {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Articles du blog</h2>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">Articles du blog</h2>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsCreating(true)}
+          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center"
+        >
+          <Plus className="h-5 w-5 mr-2" />
+          Nouvel article
+        </motion.button>
+      </div>
+
+      {isCreating && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white p-6 rounded-lg shadow-lg"
+        >
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Titre</label>
+              <input
+                type="text"
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Image</label>
+              <div className="mt-1 flex items-center">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                />
+                {formData.image && (
+                  <img src={formData.image} alt="Preview" className="h-10 w-10 object-cover ml-2 rounded" />
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Contenu</label>
+              <textarea
+                value={formData.content}
+                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                rows={6}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                required
+              />
+            </div>
+
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={formData.published}
+                onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
+                className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+              />
+              <label className="ml-2 block text-sm text-gray-700">Publier immédiatement</label>
+            </div>
+
+            <div className="flex justify-end space-x-2">
+              <button
+                type="button"
+                onClick={() => setIsCreating(false)}
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+              >
+                Annuler
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              >
+                Créer
+              </button>
+            </div>
+          </form>
+        </motion.div>
+      )}
+
       <div className="grid gap-4">
         {posts.map((post) => (
           <motion.div
@@ -102,72 +198,46 @@ export function BlogPanel() {
             animate={{ opacity: 1, y: 0 }}
             className="bg-white p-4 rounded-lg shadow"
           >
-            {editingPost === post._id ? (
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  value={editForm.title}
-                  onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-                <textarea
-                  value={editForm.content}
-                  onChange={(e) => setEditForm({ ...editForm, content: e.target.value })}
-                  className="w-full p-2 border rounded"
-                  rows={4}
-                />
-                <div className="flex justify-end space-x-2">
-                  <button
-                    onClick={() => handleSaveEdit(post._id)}
-                    className="text-green-600 hover:text-green-900"
-                  >
-                    <Check className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={() => setEditingPost(null)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center">
+                <FileText className="h-5 w-5 text-gray-400 mr-2" />
+                <h3 className="text-lg font-medium text-gray-900">
+                  {post.title}
+                </h3>
               </div>
-            ) : (
-              <>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center">
-                    <FileText className="h-5 w-5 text-gray-400 mr-2" />
-                    <h3 className="text-lg font-medium text-gray-900">
-                      {post.title}
-                    </h3>
-                  </div>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEditPost(post._id)}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      <Edit2 className="h-5 w-5" />
-                    </button>
-                    <button
-                      onClick={() => handleDeletePost(post._id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      <Trash2 className="h-5 w-5" />
-                    </button>
-                  </div>
-                </div>
-                <p className="text-gray-600">{post.content}</p>
-                <div className="mt-2 flex justify-between items-center">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    post.published ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                  }`}>
-                    {post.published ? 'Publié' : 'Brouillon'}
-                  </span>
-                  <span className="text-xs text-gray-500">
-                    {new Date(post.createdAt).toLocaleString()}
-                  </span>
-                </div>
-              </>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => setEditingPost(post._id)}
+                  className="text-blue-600 hover:text-blue-900"
+                >
+                  <Edit2 className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={() => {
+                    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+                      // Handle delete
+                    }
+                  }}
+                  className="text-red-600 hover:text-red-900"
+                >
+                  <Trash2 className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+            {post.image && (
+              <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded mb-2" />
             )}
+            <p className="text-gray-600">{post.content}</p>
+            <div className="mt-2 flex justify-between items-center">
+              <span className={`px-2 py-1 text-xs rounded-full ${
+                post.published ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+              }`}>
+                {post.published ? 'Publié' : 'Brouillon'}
+              </span>
+              <span className="text-xs text-gray-500">
+                {new Date(post.createdAt).toLocaleString()}
+              </span>
+            </div>
           </motion.div>
         ))}
       </div>

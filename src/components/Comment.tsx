@@ -12,12 +12,11 @@ interface Comment {
   createdAt: string;
 }
 
-// interface CommentsProps {
-//   projectId: string;
-// }
+interface CommentsProps {
+   projectId: string;
+}
 
-// export function Comments({ projectId }: CommentsProps) {
-export function Comments() {
+export function Comments({ projectId }: CommentsProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [formData, setFormData] = useState({
     name: '',

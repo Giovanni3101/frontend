@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Comments } from '../../components/Comment';
 import { ProjectCard } from '../../components/ProjectCard';
 import p1 from '../../img/PHOTO12.jpg';
@@ -152,6 +153,20 @@ export function Formation() {
                 </motion.div>
               ))}
             </div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Link to='/projects'>
+                <button
+                  className="w-1/2 bg-green-600 mx-auto mt-10 mb-[-30px] text-white flex justify-center align-center text-center px-3 py-2 rounded-md hover:bg-green-700"
+                >
+                  Voir plus
+                </button>
+              </Link>
+            </motion.div>
           </div>
         </section>
         <section className="pb-12 pt-12 md:mt-[-80px]">
@@ -163,7 +178,7 @@ export function Formation() {
             className="relative"
           >
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <Comments />
+              <Comments projectId="formation"/>
             </div>
           </motion.div>
         </section>

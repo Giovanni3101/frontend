@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Comments } from '../../components/Comment';
 import { ProjectCard } from '../../components/ProjectCard';
 import p1 from '../../img/star3.png';
@@ -11,12 +12,12 @@ import entre from "../../img/PHOTO8.jpg"
 export function Boite() {
   const projects = [
     {
-        title: 'Agriculture Durable',
-        description: "Projet d'agriculture moderne pour améliorer la production locale.",
-        image: photoagri,
-        category: 'Agriculture',
-        link: '/projects/agriculture'
-      },
+      title: 'Agriculture Durable',
+      description: "Projet d'agriculture moderne pour améliorer la production locale.",
+      image: photoagri,
+      category: 'Agriculture',
+      link: '/projects/agriculture'
+    },
     {
       title: 'Formation en entrepreneuriat ',
       description:
@@ -69,7 +70,7 @@ export function Boite() {
                   Notre Impact
                 </h2>
                 <p className="lg:text-center mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                 STARTUPS
+                  STARTUPS
                 </p>
                 <p className='mt-14'>
                   MVWAssociation est une association des jeunes conscients, ambitieux près pour le changement positif et intégral de toute la communauté de congolaise et surtout de la communauté de la ville de GOMA avec quatre départements; la science et technologie, l'art, l'humanisme et la politique
@@ -109,6 +110,20 @@ export function Boite() {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link to='/projects'>
+              <button
+                className="w-1/2 bg-green-600 mx-auto mt-10 mb-[-30px] text-white flex justify-center align-center text-center px-3 py-2 rounded-md hover:bg-green-700"
+              >
+                Voir plus
+              </button>
+            </Link>
+          </motion.div>
         </div>
       </section>
       <section className="pb-12 pt-12 md:mt-[-80px]">
@@ -120,7 +135,7 @@ export function Boite() {
           className="relative"
         >
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Comments />
+            <Comments projectId="startups"/>
           </div>
         </motion.div>
       </section>

@@ -20,7 +20,7 @@ import { RegisterForm } from './components/auth/RegisterForm';
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import { Web } from './pages/Projects/Concours';
 import { Village } from './pages/Projects/Construction';
-import { Ecole} from './pages/Projects/Education';
+import { Ecole } from './pages/Projects/Education';
 import { Ecologie } from './pages/Projects/Reboisement';
 import { Boite } from './pages/Projects/Startups';
 import { ScrolToTop } from './components/ScrolToTop'
@@ -35,7 +35,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <ScrolToTop/>
+        <ScrolToTop />
         <div className="min-h-screen flex flex-col">
           <Navbar />
           <main className="flex-grow">
@@ -59,13 +59,14 @@ function App() {
               <Route path="/projects/concours" element={<Web />} />
               <Route path="/projects/construction-village" element={<Village />} />
               <Route path="/projects/reboisement" element={<Ecole />} />
-              <Route path="/projects/startups" element={<Boite/>} />
+              <Route path="/projects/startups" element={<Boite />} />
               <Route path="/projects/education" element={<Ecologie />} />
               <Route
                 path="/admin"
                 element={
+                  <PrivateRoute adminOnly>
                     <Admin />
-                }
+                  </PrivateRoute>}
               />
               <Route
                 path="/contact"
