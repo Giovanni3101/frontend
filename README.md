@@ -12,8 +12,8 @@ Une application web moderne pour la gestion de projets écologiques et durables 
 
 1. Cloner le repository :
 ```bash
-git clone <repository-url>
-cd impact-eco-group
+git clone https://github.com/Giovanni3101/frontend.git
+cd frontend
 ```
 
 2. Installer les dépendances du frontend :
